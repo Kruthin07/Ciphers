@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d1b">
+  <title>Ciphers | Cryptography Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <nav class="navbar navbar-expand-lg navbar-dark topbar">
+    <div class="container-fluid page-container">
+      <a class="navbar-brand d-flex align-items-center gap-3" href="#dashboard">
+        <span class="brand-mark"><i class="fa-solid fa-shield-halved"></i></span>
+        <span><strong>cipher<span class="brand-dot">.</span>lab</strong><small class="d-block brand-sub">CRYPTOGRAPHY WORKSPACE</small></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <div class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <a class="nav-link active" href="#dashboard">Dashboard</a>
+          <a class="nav-link" href="#workspace">Encrypt</a>
+          <a class="nav-link" href="#workspace">Decrypt</a>
+          <a class="nav-link" href="#how-it-works">How It Works</a>
+          <span class="nav-status"><span class="status-dot"></span> SYSTEM ONLINE</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-fluid page-container pb-5" id="dashboard">
+    <section class="hero-section">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> CLASSICAL CRYPTOGRAPHY <span class="eyebrow-pill">CRYPTography TOOL</span></div>
+        <h1><span>Ciphers</span></h1>
+        <p class="hero-subtitle">Polyalphabetic Substitution Cipher</p>
+        <p class="hero-description">Explore how a repeating keyword transforms a message through modular arithmetic. Encrypt, decrypt, and inspect every character-level calculation.</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="hero-lock"><i class="fa-solid fa-lock"></i></div>
+        <span class="orbit-letter letter-a">V</span><span class="orbit-letter letter-b">26</span><span class="orbit-letter letter-c">K</span>
+        <div class="hero-code">C = (P + K) mod 26</div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Cipher statistics">
+      <article class="stat-card"><div class="stat-icon cyan"><i class="fa-solid fa-text-width"></i></div><div><p>Characters</p><strong id="statCharacters">11</strong><small>Total message length</small></div><span class="stat-index">01</span></article>
+      <article class="stat-card"><div class="stat-icon purple"><i class="fa-solid fa-font"></i></div><div><p>Letters Processed</p><strong id="statLetters">10</strong><small>Alphabetic characters</small></div><span class="stat-index">02</span></article>
+      <article class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-key"></i></div><div><p>Key Length</p><strong id="statKey">3</strong><small>Alphabetic key letters</small></div><span class="stat-index">03</span></article>
+      <article class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-arrows-rotate"></i></div><div><p>Operation</p><strong id="statOperation" class="operation-label">Encrypt</strong><small id="statOperationSub">Ready to transform</small></div><span class="stat-index">04</span></article>
+    </section>
+
+    <section class="section-block" id="workspace">
+      <div class="section-heading"><div><span class="section-kicker">01 / WORKSPACE</span><h2>Message studio</h2><p>Provide your message and secret key to begin.</p></div><span class="section-tag"><i class="fa-solid fa-circle-nodes"></i> LOCAL PROCESSING</span></div>
+      <div class="workspace-grid">
+        <article class="glass-card input-card">
+          <div class="card-topline"><div class="panel-icon"><i class="fa-solid fa-terminal"></i></div><div><h3>Input parameters</h3><p>Message & key configuration</p></div><span class="live-tag">LIVE</span></div>
+          <label for="messageInput" class="form-label">PLAINTEXT / CIPHERTEXT</label>
+          <textarea id="messageInput" class="form-control message-input" rows="4" placeholder="Enter your message..." spellcheck="false">HELLO WORLD</textarea>
+          <div class="input-meta"><span><i class="fa-solid fa-keyboard"></i> Spaces and symbols are preserved</span><span id="messageCount">11 chars</span></div>
+          <label for="keyInput" class="form-label mt-4">SECRET KEY</label>
+          <div class="key-input-wrap"><span class="key-prefix"><i class="fa-solid fa-key"></i></span><input id="keyInput" class="form-control" type="text" placeholder="Enter encryption key..." value="KEY" autocomplete="off" spellcheck="false"><span class="key-secure"><i class="fa-solid fa-lock"></i> PRIVATE</span></div>
+          <div class="input-hint"><i class="fa-solid fa-circle-info"></i> Only A–Z key letters are used. Other key characters are ignored.</div>
+          <div class="action-row">
+            <button id="encryptBtn" class="btn btn-primary-gradient"><i class="fa-solid fa-lock me-2"></i>Encrypt</button>
+            <button id="decryptBtn" class="btn btn-outline-cyan"><i class="fa-solid fa-lock-open me-2"></i>Decrypt</button>
+            <button id="clearBtn" class="btn btn-ghost"><i class="fa-solid fa-rotate-left me-2"></i>Clear</button>
+          </div>
+          <div id="validationMessage" class="validation-message" role="alert" aria-live="polite"></div>
+        </article>
+
+        <article class="glass-card result-card" id="resultPanel">
+          <div class="card-topline"><div class="panel-icon result-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><div><h3>Transformation output</h3><p>Your generated result</p></div><span class="result-status" id="resultStatus"><span class="status-dot"></span> DEMO RESULT</span></div>
+          <div class="result-label"><span id="resultTitle">ENCRYPTED RESULT</span><span class="result-chip" id="resultChip">CIPHERTEXT</span></div>
+          <div class="result-output" id="resultOutput" aria-live="polite">RIJVS GSPVH</div>
+          <div class="result-divider"></div>
+          <div class="result-details">
+            <div><span>FORMULA</span><strong id="formulaDisplay">C = (P + K) mod 26</strong></div>
+            <div><span>REPEATED KEY</span><strong id="repeatedKeyDisplay" class="mono">KEYKE YKEYK</strong></div>
+          </div>
+          <div class="result-actions">
+            <button id="copyBtn" class="btn btn-copy"><i class="fa-regular fa-copy me-2"></i>Copy Result</button>
+            <button id="downloadBtn" class="btn btn-download"><i class="fa-solid fa-download me-2"></i>Download Result</button>
+          </div>
+          <div id="copyFeedback" class="copy-feedback" role="status" aria-live="polite"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading"><div><span class="section-kicker">02 / TRACE</span><h2>Character-by-character trace</h2><p>Follow each letter through the Vigenère formula.</p></div><span class="section-tag"><i class="fa-solid fa-list-ol"></i> <span id="stepCount">10 STEPS</span></span></div>
+      <article class="glass-card trace-card">
+        <div class="trace-summary"><div><span class="trace-label">MESSAGE</span><strong id="traceMessage">HELLO WORLD</strong></div><div><span class="trace-label">KEY STREAM</span><strong id="traceKey" class="mono">KEYKE YKEYK</strong></div><div><span class="trace-label">FORMULA APPLIED</span><strong id="traceFormula" class="mono">C = (P + K) mod 26</strong></div></div>
+        <div class="table-responsive trace-table-wrap">
+          <table class="table trace-table align-middle mb-0"><thead><tr><th>Position</th><th>Input</th><th>Key</th><th>Input value</th><th>Key value</th><th>Calculation</th><th>Output</th></tr></thead><tbody id="calculationBody"><tr><td>1</td><td class="letter-cell">H</td><td class="key-cell">K</td><td>7</td><td>10</td><td class="formula-cell">(7 + 10) % 26</td><td><span class="output-letter">R</span></td></tr></tbody></table>
+        </div>
+        <div id="emptyTrace" class="empty-state d-none"><i class="fa-solid fa-code"></i><p>Run an operation to populate the calculation trace.</p></div>
+        <div class="trace-footnote"><i class="fa-solid fa-circle-info"></i> Non-letter characters pass through unchanged and do not consume a key character.</div>
+      </article>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading"><div><span class="section-kicker">03 / MECHANISM</span><h2>Cipher flow</h2><p>A visual overview of the transformation pipeline.</p></div></div>
+      <div class="flow-grid">
+        <div class="flow-step"><span class="flow-number">01</span><div class="flow-icon cyan"><i class="fa-solid fa-message"></i></div><h3 id="flowInputTitle">Plaintext</h3><p>Start with your original message.</p><div class="flow-preview" id="flowInput">HELLO WORLD</div></div>
+        <div class="flow-connector"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="flow-step"><span class="flow-number">02</span><div class="flow-icon purple"><i class="fa-solid fa-hashtag"></i></div><h3>Map to numbers</h3><p>Convert each letter using A = 0.</p><div class="flow-preview" id="flowNumbers">7 · 4 · 11 · 11 · 14</div></div>
+        <div class="flow-connector"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="flow-step"><span class="flow-number">03</span><div class="flow-icon blue"><i class="fa-solid fa-calculator"></i></div><h3>Apply formula</h3><p id="flowFormulaText">Combine message and key values.</p><div class="flow-preview formula-preview" id="flowFormula">C = (P + K) mod 26</div></div>
+        <div class="flow-connector"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="flow-step"><span class="flow-number">04</span><div class="flow-icon green"><i class="fa-solid fa-check-double"></i></div><h3 id="flowOutputTitle">Ciphertext</h3><p>Map the result back to letters.</p><div class="flow-preview" id="flowOutput">RIJVS GSPVH</div></div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading"><div><span class="section-kicker">04 / REFERENCE</span><h2>Alphabet mapping</h2><p>The numeric foundation of modular arithmetic.</p></div></div>
+      <article class="glass-card alphabet-card">
+        <div class="alphabet-head"><div><h3>Letter-to-number reference</h3><p>Every letter maps to a value from 0 to 25.</p></div><span class="mapping-badge">A = 0 <span>→</span> Z = 25</span></div>
+        <div class="alphabet-grid" id="alphabetGrid"></div>
+        <div class="alphabet-note"><i class="fa-solid fa-lightbulb"></i><span>Tip: <b>mod 26</b> wraps values around the alphabet. For example, 27 mod 26 = 1, which maps to B.</span></div>
+      </article>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading"><div><span class="section-kicker">05 / TABULA RECTA</span><h2>Vigenère square</h2><p>Select a calculation step to inspect its row, column, and intersection.</p></div><span class="section-tag"><i class="fa-solid fa-table-cells"></i> 26 × 26 MATRIX</span></div>
+      <article class="glass-card matrix-card">
+        <div class="matrix-toolbar"><div class="matrix-legend"><span><i class="legend-dot plaintext-dot"></i> Input letter</span><span><i class="legend-dot key-dot"></i> Key letter</span><span><i class="legend-dot output-dot"></i> Output intersection</span></div><div class="matrix-selection" id="matrixSelection">Select a step from the trace table</div></div>
+        <div class="matrix-scroll"><table class="vigenere-table" id="vigenereTable" aria-label="Vigenere tabula recta"></table></div>
+        <p class="matrix-caption"><i class="fa-solid fa-arrow-pointer"></i> Click a row in the calculation trace to highlight the matching cells in this table.</p>
+      </article>
+    </section>
+
+    <section class="section-block" id="how-it-works">
+      <div class="section-heading"><div><span class="section-kicker">06 / LEARN</span><h2>How it works</h2><p>Understand the method behind the message.</p></div></div>
+      <div class="learn-grid">
+        <article class="glass-card learn-card"><div class="learn-icon"><i class="fa-solid fa-book-open"></i></div><h3>What is the Vigenère Cipher?</h3><p>The Vigenère Cipher is a <b>polyalphabetic substitution cipher</b> that uses a keyword to encrypt text. Different key letters shift the message letters by different amounts, unlike a single-shift Caesar cipher.</p><div class="equation"><span>ENCRYPTION</span><strong>C = (P + K) mod 26</strong></div><div class="equation"><span>DECRYPTION</span><strong>P = (C − K + 26) mod 26</strong></div></article>
+        <article class="glass-card learn-card security-card"><div class="learn-icon warning"><i class="fa-solid fa-triangle-exclamation"></i></div><h3>Security notes</h3><div class="pros-cons"><div><h4><i class="fa-solid fa-circle-check"></i> Advantages</h4><ul><li>Simple to understand and implement</li><li>Uses multiple substitution alphabets</li><li>More varied than a Caesar cipher</li></ul></div><div><h4><i class="fa-solid fa-circle-xmark"></i> Limitations</h4><ul><li>Repeating keys can be attacked statistically</li><li>Short keys are easier to analyze</li><li>Not suitable for modern secure communication</li></ul></div></div><div class="education-note"><i class="fa-solid fa-graduation-cap"></i><span>Educational use only. Vigenère is a historical cipher, not a modern security tool.</span></div></article>
+      </div>
+    </section>
+    <footer class="footer"><div class="footer-brand"><span class="brand-mark small"><i class="fa-solid fa-shield-halved"></i></span><span>cipher.lab</span></div><span>CLASSICAL CRYPTOGRAPHY <b>•</b> BUILT FOR LEARNING</span><a href="#dashboard">Back to top <i class="fa-solid fa-arrow-up"></i></a></footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
